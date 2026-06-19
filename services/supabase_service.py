@@ -7,12 +7,23 @@ supabase = create_client(
 )
 
 def get_contacts():
-    response = (
-        supabase
-        .table("contacts")
-        .select("*")
-        .limit(3)
-        .execute()
-    )
 
-    return response.data
+    try:
+
+        response = (
+            supabase
+            .table("contacts")
+            .select("*")
+            .limit(3)
+            .execute()
+        )
+
+        return response.data
+
+    except Exception as e:
+
+        print(
+            f"Erro ao consultar Supabase: {e}"
+        )
+
+        return []
